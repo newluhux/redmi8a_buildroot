@@ -1,0 +1,8 @@
+* redmi8a buildroot support
+
+* changelog
+
+2022/11/03:
+
+Now linux kernel build ok, fix some stupid error.
+
