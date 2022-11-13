@@ -1,8 +1,131 @@
 * redmi8a buildroot support
 
-* changelog
+** how to use this repo
+
+#+BEGIN_SRC shell
+  curl -O https://buildroot.org/downloads/buildroot-2022.02.6.tar.xz
+  tar xf buildroot-2022.02.6.tar.xz
+  cd buildroot-2022.02.6/
+  export BR2_EXTERNAL=/path/to/thisrepo/buildroot-2022.02.6
+  make redmi8a_defconfig
+  make -j$(nproc)
+  fastboot boot output/images/remdi8a.img
+#+END_SRC
+
+** todo
+
+| hardware    | status |
+|-------------+--------|
+| screen      | ?      |
+| touchscreen | ?      |
+| button      | ?      |
+| audio       | ?      |
+| wifi        | ?      |
+| 4/3/2g      | ?      |
+| bluetooth   | ?      |
+| emmc        | ?      |
+| sdcard      | ?      |
+| camera      | ?      |
+| usb         | ?      |
+| fm          | ?      |
+| gps         | ?      |
+| sms         | ?      |
+| call        | ?      |
+
+*** 32bit or 64bit
+
+64bit kernel panic after boot, I haven't time to fix it.
+
+now use 32bit kernel.
+
+*** lvgl
+
+try use lvgl-framebuffer to make a UI for touch screen.
+
+*** mainline kernel
+
+xiaomi's kernel source code is buggy.
+
+need mainline kernel, but I haven't time to make it.
+
+** MIUI is a pice of shit
+
+fuck you, MIUI
+
+** unlock bootloader
+
+need unlock bootloader.
+
+** firmware
+
+need flash this firmware:
+
+http://bigota.d.miui.com/V10.3.3.0.PCPCNXM/olivelite_images_V10.3.3.0.PCPCNXM_20190920.0000.00_9.0_cn_895fdadf12.tgz
+
+** vbmeta
+
+need flash vbmeta to disable boot verify.
+
+https://dl.google.com/developers/android/qt/images/gsi/vbmeta.img
+
+#+BEGIN_SRC shell
+fastboot flash vbmeta vbmeta.img
+#+END_SRC
+
+** dtbo
+
+dtbo partition will overwrite boot.img's devicetree, so, wipe it.
+
+#+BEGIN_SRC shell
+fastboot 
+#+END_SRC
+
+reference: https://www.akr-developers.com/d/353/3
+
+** bootup without flash
+
+#+BEGIN_SRC shell
+fastboot boot boot.img
+#+END_SRC
+
+** flash into device
+
+#+BEGIN_SRC shell
+fastboot flash boot boot.img
+#+END_SRC
+
+** crash log
+
+*** pstore file system
+
+kernel will autosave boot log in pstore.
+
+next boot get it:
+
+#+BEGIN_SRC
+ls /sys/fs/pstore/
+#+END_SRC
+
+*** ram dump patition (not test)
+
+ram dump will save to partition:
+
+#+BEGIN_SRC text
+UUID=66C9B323-F7FC-48B6-BF96-6F32E335A428
+#+END_SRC
+
+https://www.akr-developers.com/d/483/2
+
+** changelog
 
 2022/11/03:
 
 Now linux kernel build ok, fix some stupid error.
 
+2022/11/04:
+
+boot successfull, but usb gadget rndis not working, try use usb gadget serial.
+
+2022/11/13:
+
+gadget still not working, add a panic script to collect log

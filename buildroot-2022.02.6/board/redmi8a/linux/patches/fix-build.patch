@@ -1,3 +1,20 @@
+diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+index 7e805f86..e44fb51f 100644
+--- a/arch/arm/Kconfig
++++ b/arch/arm/Kconfig
+@@ -1948,6 +1948,12 @@ config DEPRECATED_PARAM_STRUCT
+ 	  This was deprecated in 2001 and announced to live on for 5 years.
+ 	  Some old boot loaders still use this way.
+ 
++config BUILD_ARM64_DT_OVERLAY
++	bool "enable DT overlay compilation support"
++	depends on OF
++	help
++	  This option enables support for DT overlay compilation.
++
+ config BUILD_ARM_APPENDED_DTB_IMAGE
+ 	bool "Build a concatenated zImage/dtb by default"
+ 	depends on OF
 diff --git a/drivers/bluetooth/btfm_slim.c b/drivers/bluetooth/btfm_slim.c
 index 92ea0135..baab63ae 100644
 --- a/drivers/bluetooth/btfm_slim.c
@@ -173,6 +190,19 @@ index 3fc1a299..bff8aab0 100644
  #include <linux/types.h>
  #include <linux/tracepoint.h>
  
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index ea98308b..ea5aa69c 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -301,6 +301,8 @@ cmd_dt_S_dtb=						\
+ $(obj)/%.dtb.S: $(obj)/%.dtb
+ 	$(call cmd,dt_S_dtb)
+ 
++DTC_EXT ?= dtc
++
+ ifneq ($(DTC_EXT),)
+ DTC = $(DTC_EXT)
+ else
 diff --git a/scripts/gcc-wrapper.py b/scripts/gcc-wrapper.py
 index 76fb91c5..07a022b4 100755
 --- a/scripts/gcc-wrapper.py

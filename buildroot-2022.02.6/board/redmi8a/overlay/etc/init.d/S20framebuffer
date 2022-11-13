@@ -1,0 +1,9 @@
+#!/bin/sh
+
+mode="$(cat /sys/class/graphics/fb0/modes)"
+echo "$mode" > /sys/class/graphics/fb0/mode
+while true
+do
+	dd if=/dev/urandom of=/dev/fb0
+done &
+exit 0

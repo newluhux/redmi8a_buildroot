@@ -1,0 +1,12 @@
+#!/bin/sh
+mkdir -pv /vendor
+mount -t ext4 -o ro /dev/block/by-name/vendor /vendor
+mkdir -pv /vendor/firmware_mnt
+mount -t vfat -o ro /dev/block/by-name/modem /vendor/firmware_mnt 
+mkdir -pv /vendor/dsp
+mount -t ext4 -o ro /dev/block/by-name/dsp /vendor/dsp
+mkdir -pv /mnt/vendor/persist
+mount -t ext4 -o ro /dev/block/by-name/persist /mnt/vendor/persist
+mkdir -pv /config
+mount -t configfs configfs /config
+exit 0
