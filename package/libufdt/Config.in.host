@@ -4,4 +4,4 @@ config BR2_PACKAGE_HOST_LIBUFDT
 	help
 	 mkdtboimg  
 
-	 https://git.kernel.org/cgit/utils/dtc/dtc.git
+	 https://android.googlesource.com/platform/system/libufdt/
