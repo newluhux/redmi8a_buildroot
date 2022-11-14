@@ -1,0 +1,6 @@
+config BR2_PACKAGE_MSM_FB_REFRESHER
+	bool "msm-fb-refresher"
+	help
+	 fix buggy msm framebuffer
+
+	 https://github.com/AsteroidOS/msm-fb-refresher
