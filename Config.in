@@ -1,0 +1,2 @@
+source "$BR2_EXTERNAL_REDMI8A_PATH/package/libufdt/Config.in"
+source "$BR2_EXTERNAL_REDMI8A_PATH/package/libufdt/Config.in.host"

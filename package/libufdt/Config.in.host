@@ -1,0 +1,7 @@
+config BR2_PACKAGE_HOST_LIBUFDT
+	bool "host libufdt"
+	select BR2_PACKAGE_HOST_PYTHON3
+	help
+	 mkdtboimg  
+
+	 https://git.kernel.org/cgit/utils/dtc/dtc.git

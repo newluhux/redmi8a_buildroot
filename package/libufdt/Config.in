@@ -1,0 +1,7 @@
+config BR2_PACKAGE_LIBUFDT
+	bool "libufdt"
+	select BR2_PACKAGE_PYTHON3
+	help
+	 mkdtboimg  
+
+	 https://git.kernel.org/cgit/utils/dtc/dtc.git
