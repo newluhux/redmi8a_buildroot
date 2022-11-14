@@ -66,6 +66,8 @@ fastboot flash vbmeta vbmeta.img
 
 ** dtbo
 
+note: don't flash dtbo.img, it's borken now.
+
 #+BEGIN_SRC shell
 fastboot flash dtbo dtbo.img
 #+END_SRC
