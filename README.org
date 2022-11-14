@@ -66,10 +66,8 @@ fastboot flash vbmeta vbmeta.img
 
 ** dtbo
 
-dtbo partition will overwrite boot.img's devicetree, so, wipe it.
-
 #+BEGIN_SRC shell
-fastboot 
+fastboot flash dtbo dtbo.img
 #+END_SRC
 
 reference: https://www.akr-developers.com/d/353/3
