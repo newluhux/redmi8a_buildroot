@@ -1,8 +1,8 @@
 #!/bin/sh
 
-sleep 10
 mode="$(cat /sys/class/graphics/fb0/modes)"
 echo "$mode" > /sys/class/graphics/fb0/mode
+msm-fb-refresher --loop &
 while true
 do
 	dd if=/dev/urandom of=/dev/fb0
