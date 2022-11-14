@@ -3,10 +3,8 @@
 ** how to use this repo
 
 #+BEGIN_SRC shell
-  curl -O https://buildroot.org/downloads/buildroot-2022.02.6.tar.xz
-  tar xf buildroot-2022.02.6.tar.xz
-  cd buildroot-2022.02.6/
-  export BR2_EXTERNAL=/path/to/thisrepo/buildroot-2022.02.6
+  git clone https://git.buildroot.net/buildroot
+  export BR2_EXTERNAL=/path/to/thisrepo/
   make redmi8a_defconfig
   make -j$(nproc)
   fastboot boot output/images/remdi8a.img
@@ -31,12 +29,6 @@
 | gps         | ?      |
 | sms         | ?      |
 | call        | ?      |
-
-*** 32bit or 64bit
-
-64bit kernel panic after boot, I haven't time to fix it.
-
-now use 32bit kernel.
 
 *** lvgl
 
@@ -116,6 +108,17 @@ UUID=66C9B323-F7FC-48B6-BF96-6F32E335A428
 
 https://www.akr-developers.com/d/483/2
 
+*** save to sdcard
+
+#+BEGIN_SRC shell
+mkdir /mnt/log
+mount /dev/block/mmcblk1p1 /mnt/log
+dmesg >> /mnt/log/dmesg
+ifconfig >> /mnt/log/net
+du >> /mnt/log/files
+unmount /mnt/log
+#+END_SRC
+
 ** changelog
 
 2022/11/03:
@@ -129,3 +132,7 @@ boot successfull, but usb gadget rndis not working, try use usb gadget serial.
 2022/11/13:
 
 gadget still not working, add a panic script to collect log
+
+2022/11/14:
+
+switch to buildroot master, 64bit toolchain, 64bit kernel, 64bit system.

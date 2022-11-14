@@ -19,15 +19,14 @@ mkdir -pv $CONFIGFS/g1/strings/0x409
 echo "xiaomi" > $CONFIGFS/g1/strings/0x409/manufacturer
 echo "buildroot" > $CONFIGFS/g1/strings/0x409/serialnumber
 echo "redmi8a" > $CONFIGFS/g1/strings/0x409/product
-mkdir -pv $CONFIGFS/g1/functions/acm.GS0
+mkdir -pv $CONFIGFS/g1/functions/rndis.usb0
 mkdir -pv $CONFIGFS/g1/configs/c.1
 mkdir -pv $CONFIGFS/g1/configs/c.1/strings/0x409
-echo 'acm' > $CONFIGFS/g1/configs/c.1/strings/0x409/configuration
-ln -sv $CONFIGFS/g1/functions/acm.GS0 $CONFIGFS/g1/configs/c.1
+echo 'rndis' > $CONFIGFS/g1/configs/c.1/strings/0x409/configuration
+ln -sv $CONFIGFS/g1/functions/rndis.usb0 $CONFIGFS/g1/configs/c.1
 ls /sys/class/udc > $CONFIGFS/g1/UDC
-stty -F /dev/ttyGS0 115200
-while true
-do
-	dmesg > /dev/ttyGS0
-done &
+ifconfig rndis0 up
+ifconfig usb0 up
+ifconfig rndis0 192.168.200.1/24
+ifconfig usb0 192.168.200.1/24
 exit 0
